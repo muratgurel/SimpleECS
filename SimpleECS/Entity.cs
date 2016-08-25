@@ -15,6 +15,11 @@ namespace SimpleECS
 
 		private readonly Dictionary<Type, IComponent> components = new Dictionary<Type, IComponent>();
 
+		public T AddComponent<T>() where T : IComponent, new()
+		{
+			throw new NotImplementedException();
+		}
+
 		internal void ClearAllComponents()
 		{
 			components.Clear();
