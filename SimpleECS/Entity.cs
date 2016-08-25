@@ -15,6 +15,11 @@ namespace SimpleECS
 
 		private readonly Dictionary<Type, IComponent> components = new Dictionary<Type, IComponent>();
 
+		public T GetComponent<T>()
+		{
+			throw new NotImplementedException();
+		}
+
 		public bool HasComponent<T>()
 		{
 			throw new NotImplementedException();
