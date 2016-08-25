@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{82FA8384-2BB7-4BB3-954B-3C68DEBA6FDD}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SimpleECSTests</RootNamespace>
+    <RootNamespace>SimpleECS.Test</RootNamespace>
     <AssemblyName>SimpleECSTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
