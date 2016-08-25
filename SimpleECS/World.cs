@@ -26,6 +26,11 @@ namespace SimpleECS
 			entity.ClearAllComponents();
 			entities.Remove(entity);
 		}
+
+		public List<Entity> GetEntities(IPredicate<Entity> predicate)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }
 
