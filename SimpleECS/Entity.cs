@@ -15,12 +15,12 @@ namespace SimpleECS
 
 		private readonly Dictionary<Type, IComponent> components = new Dictionary<Type, IComponent>();
 
-		public T GetComponent<T>()
+		public T GetComponent<T>() where T : IComponent
 		{
 			throw new NotImplementedException();
 		}
 
-		public bool HasComponent<T>()
+		public bool HasComponent<T>() where T : IComponent
 		{
 			return components.ContainsKey(typeof(T));
 		}
