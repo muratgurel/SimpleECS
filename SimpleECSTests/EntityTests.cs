@@ -15,12 +15,14 @@ namespace SimpleECS.Test
 			entity = world.CreateEntity();
 		}
 
+		[Test]
 		public void ShouldAddComponentToEntityAfterAdd()
 		{
 			entity.AddComponent<EmptyComponent>();
 			Assert.AreEqual(entity.componentCount, 1);
 		}
 
+		[Test]
 		public void ShouldRemoveComponentFromEntityAfterRemove()
 		{
 			IComponent newComponent = entity.AddComponent<EmptyComponent>();
@@ -29,6 +31,7 @@ namespace SimpleECS.Test
 			Assert.AreEqual(entity.componentCount, 0);
 		}
 
+		[Test]
 		public void ShouldClearAllComponentsAfterClear()
 		{
 			entity.AddComponent<EmptyComponent>();
@@ -37,23 +40,27 @@ namespace SimpleECS.Test
 			Assert.AreEqual(entity.componentCount, 0);
 		}
 
+		[Test]
 		public void ShouldReturnTrueIfComponentPresent()
 		{
 			entity.AddComponent<EmptyComponent>();
 			Assert.IsTrue(entity.HasComponent<EmptyComponent>());
 		}
 
+		[Test]
 		public void ShouldReturnFalseIfComponentIsNotPresent()
 		{
 			Assert.IsFalse(entity.HasComponent<EmptyComponent>());
 		}
 
+		[Test]
 		public void ShouldReturnComponentIfPresent()
 		{
 			entity.AddComponent<EmptyComponent>();
 			Assert.IsNotNull(entity.GetComponent<EmptyComponent>());
 		}
 
+		[Test]
 		public void ShouldReturnNullIfComponentIsNotPresent()
 		{
 			Assert.IsNull(entity.GetComponent<EmptyComponent>());
