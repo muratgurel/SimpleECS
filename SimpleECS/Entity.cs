@@ -39,7 +39,7 @@ namespace SimpleECS
 
 		public T AddComponent<T>() where T : IComponent, new()
 		{
-			T newComponent = new T();
+			var newComponent = new T();
 			components.Add(newComponent.GetType(), newComponent);
 			return newComponent;
 		}
