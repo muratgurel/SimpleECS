@@ -22,7 +22,7 @@ namespace SimpleECS
 
 		public bool HasComponent<T>()
 		{
-			throw new NotImplementedException();
+			return components.ContainsKey(typeof(T));
 		}
 
 		public T AddComponent<T>() where T : IComponent, new()
