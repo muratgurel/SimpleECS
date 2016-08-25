@@ -5,7 +5,7 @@ namespace SimpleECS
 {
 	public class Entity
 	{
-		public Dictionary<Type, IComponent> components = new Dictionary<Type, IComponent>();
+		private Dictionary<Type, IComponent> components = new Dictionary<Type, IComponent>();
 	}
 }
 
