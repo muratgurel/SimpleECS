@@ -16,7 +16,9 @@ namespace SimpleECS
 
 		public Entity CreateEntity()
 		{
-			throw new System.NotImplementedException();
+			Entity newEntity = new Entity();
+			entities.Add(newEntity);
+			return newEntity;
 		}
 
 		public void DestroyEntity(Entity entity)
