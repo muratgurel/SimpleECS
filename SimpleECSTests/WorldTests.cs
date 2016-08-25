@@ -58,7 +58,7 @@ namespace SimpleECS.Test
 			Assert.Fail();
 		}
 
-		private class EmptyComponent : IComponent {}
+		private class EmptyComponent : IComponent { }
 	}
 }
 
