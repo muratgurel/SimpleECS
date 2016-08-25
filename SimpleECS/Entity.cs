@@ -25,7 +25,7 @@ namespace SimpleECS
 			throw new NotImplementedException();
 		}
 
-		internal void ClearAllComponents()
+		public void ClearAllComponents()
 		{
 			components.Clear();
 		}
