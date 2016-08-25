@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace SimpleECS.Test
 {
@@ -49,16 +50,51 @@ namespace SimpleECS.Test
 		[Test]
 		public void ShouldReturnAllEntitiesWithRequestedComponents()
 		{
-			Assert.Fail();
+			EntityPredicate predicate = EntityPredicate.New.Include<EmptyComponent>();
+
+			Entity entityWithEmptyComponent = world.CreateEntity();
+			entityWithEmptyComponent.AddComponent<EmptyComponent>();
+
+			Entity entityWithComponentTwo = world.CreateEntity();
+			entityWithComponentTwo.AddComponent<EmptyComponentTwo>();
+
+			Entity entityWithAllThreeComponents = world.CreateEntity();
+			entityWithAllThreeComponents.AddComponent<EmptyComponent>();
+			entityWithAllThreeComponents.AddComponent<EmptyComponentTwo>();
+			entityWithAllThreeComponents.AddComponent<EmptyComponentThree>();
+
+			List<Entity> filteredEntities = world.GetEntities(predicate);
+
+			Assert.AreEqual(filteredEntities.Count, 2);
+			Assert.Contains(entityWithEmptyComponent, filteredEntities);
+			Assert.Contains(entityWithAllThreeComponents, filteredEntities);
 		}
 
 		[Test]
 		public void ShouldFilterAllEntitiesWithExcludedComponents()
 		{
-			Assert.Fail();
+			EntityPredicate predicate = EntityPredicate.New.Exclude<EmptyComponent>();
+
+			Entity entityWithEmptyComponent = world.CreateEntity();
+			entityWithEmptyComponent.AddComponent<EmptyComponent>();
+
+			Entity entityWithComponentTwo = world.CreateEntity();
+			entityWithComponentTwo.AddComponent<EmptyComponentTwo>();
+
+			Entity entityWithAllThreeComponents = world.CreateEntity();
+			entityWithAllThreeComponents.AddComponent<EmptyComponent>();
+			entityWithAllThreeComponents.AddComponent<EmptyComponentTwo>();
+			entityWithAllThreeComponents.AddComponent<EmptyComponentThree>();
+
+			List<Entity> filteredEntities = world.GetEntities(predicate);
+
+			Assert.AreEqual(filteredEntities.Count, 1);
+			Assert.Contains(entityWithComponentTwo, filteredEntities);
 		}
 
 		private class EmptyComponent : IComponent { }
+		private class EmptyComponentTwo : IComponent { }
+		private class EmptyComponentThree : IComponent { }
 	}
 }
 
