@@ -23,7 +23,8 @@ namespace SimpleECS
 
 		public void DestroyEntity(Entity entity)
 		{
-			throw new System.NotImplementedException();
+			entity.ClearAllComponents();
+			entities.Remove(entity);
 		}
 	}
 }
