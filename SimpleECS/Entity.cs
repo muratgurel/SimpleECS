@@ -27,7 +27,9 @@ namespace SimpleECS
 
 		public T AddComponent<T>() where T : IComponent, new()
 		{
-			throw new NotImplementedException();
+			T newComponent = new T();
+			components.Add(newComponent.GetType(), newComponent);
+			return newComponent;
 		}
 
 		public void RemoveComponent<T>(T component) where T : IComponent
