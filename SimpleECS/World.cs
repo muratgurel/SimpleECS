@@ -12,7 +12,7 @@ namespace SimpleECS
 			}
 		}
 
-		private HashSet<Entity> entities = new HashSet<Entity>();
+		private readonly HashSet<Entity> entities = new HashSet<Entity>();
 
 		public Entity CreateEntity()
 		{
