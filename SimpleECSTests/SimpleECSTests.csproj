@@ -38,5 +38,11 @@
   <ItemGroup>
     <Compile Include="WorldTests.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleECS\SimpleECS.csproj">
+      <Project>{0FCC5874-075E-4F9D-AEAA-41A9489EDDAA}</Project>
+      <Name>SimpleECS</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
