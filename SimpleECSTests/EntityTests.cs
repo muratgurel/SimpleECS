@@ -45,12 +45,14 @@ namespace SimpleECS.Test
 		{
 			entity.AddComponent<EmptyComponent>();
 			Assert.IsTrue(entity.HasComponent<EmptyComponent>());
+			Assert.IsTrue(entity.HasComponent(typeof(EmptyComponent)));
 		}
 
 		[Test]
 		public void ShouldReturnFalseIfComponentIsNotPresent()
 		{
 			Assert.IsFalse(entity.HasComponent<EmptyComponent>());
+			Assert.IsFalse(entity.HasComponent(typeof(EmptyComponent)));
 		}
 
 		[Test]

@@ -27,6 +27,11 @@ namespace SimpleECS
 			return default(T);
 		}
 
+		public bool HasComponent(Type type)
+		{
+			return components.ContainsKey(type);
+		}
+
 		public bool HasComponent<T>() where T : IComponent
 		{
 			return components.ContainsKey(typeof(T));
