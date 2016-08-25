@@ -13,7 +13,7 @@ namespace SimpleECS
 			}
 		}
 
-		private Dictionary<Type, IComponent> components = new Dictionary<Type, IComponent>();
+		private readonly Dictionary<Type, IComponent> components = new Dictionary<Type, IComponent>();
 	}
 }
 
