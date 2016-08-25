@@ -20,6 +20,11 @@ namespace SimpleECS
 			throw new NotImplementedException();
 		}
 
+		public void RemoveComponent<T>(T component) where T : IComponent
+		{
+			throw new NotImplementedException();
+		}
+
 		internal void ClearAllComponents()
 		{
 			components.Clear();
