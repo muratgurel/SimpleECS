@@ -41,7 +41,7 @@ namespace SimpleECS
 
 		public void RemoveComponent<T>(T component) where T : IComponent
 		{
-			throw new NotImplementedException();
+			components.Remove(component.GetType());
 		}
 
 		public void ClearAllComponents()
