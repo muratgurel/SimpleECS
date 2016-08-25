@@ -46,6 +46,18 @@ namespace SimpleECS.Test
 			Assert.AreEqual(world.entityCount, 0);
 		}
 
+		[Test]
+		public void ShouldReturnAllEntitiesWithRequestedComponents()
+		{
+			Assert.Fail();
+		}
+
+		[Test]
+		public void ShouldFilterAllEntitiesWithExcludedComponents()
+		{
+			Assert.Fail();
+		}
+
 		private class EmptyComponent : IComponent {}
 	}
 }
