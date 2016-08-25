@@ -14,6 +14,11 @@ namespace SimpleECS
 		}
 
 		private readonly Dictionary<Type, IComponent> components = new Dictionary<Type, IComponent>();
+
+		internal void ClearAllComponents()
+		{
+			components.Clear();
+		}
 	}
 }
 
