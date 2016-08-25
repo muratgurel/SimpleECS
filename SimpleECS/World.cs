@@ -29,7 +29,17 @@ namespace SimpleECS
 
 		public List<Entity> GetEntities(IPredicate<Entity> predicate)
 		{
-			throw new System.NotImplementedException();
+			var filteredEntities = new List<Entity>();
+
+			foreach (var entity in entities)
+			{
+				if (predicate.Matches(entity))
+				{
+					filteredEntities.Add(entity);
+				}
+			}
+
+			return filteredEntities;
 		}
 	}
 }
