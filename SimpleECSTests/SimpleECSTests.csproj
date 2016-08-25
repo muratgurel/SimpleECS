@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="WorldTests.cs" />
     <Compile Include="EntityTests.cs" />
+    <Compile Include="EntityPredicateTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleECS\SimpleECS.csproj">
