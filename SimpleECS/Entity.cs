@@ -17,7 +17,14 @@ namespace SimpleECS
 
 		public T GetComponent<T>() where T : IComponent
 		{
-			throw new NotImplementedException();
+			IComponent component;
+
+			if (components.TryGetValue(typeof(T), out component))
+			{
+				return (T)component;
+			}
+
+			return default(T);
 		}
 
 		public bool HasComponent<T>() where T : IComponent
