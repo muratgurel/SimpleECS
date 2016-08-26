@@ -2,7 +2,7 @@ language: csharp
 solution: SimpleECS.sln
 install:
   - nuget restore SimpleECS.sln
-  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+  - nuget install NUnit.Runners -Version 3.4.1 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release SimpleECS.sln
-  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./SimpleECSTests/bin/Release/SimpleECSTests.dll
+  - mono ./testrunner/NUnit.Runners.3.4.1/tools/nunit-console.exe ./SimpleECSTests/bin/Release/SimpleECSTests.dll
