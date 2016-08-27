@@ -13,10 +13,11 @@ namespace SimpleECS
 		}
 
 		private readonly HashSet<Entity> entities = new HashSet<Entity>();
+		private readonly ObjectPool<Entity> pool = new ObjectPool<Entity>(() => new Entity());
 
 		public Entity CreateEntity()
 		{
-			Entity newEntity = new Entity();
+			Entity newEntity = pool.GetObject();
 			entities.Add(newEntity);
 			return newEntity;
 		}
@@ -25,6 +26,7 @@ namespace SimpleECS
 		{
 			entity.ClearAllComponents();
 			entities.Remove(entity);
+			pool.PutObject(entity);
 		}
 
 		public List<Entity> GetEntities(IPredicate<Entity> predicate)
@@ -43,4 +45,3 @@ namespace SimpleECS
 		}
 	}
 }
-
