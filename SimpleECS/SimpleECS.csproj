@@ -36,6 +36,7 @@
     <Compile Include="IComponent.cs" />
     <Compile Include="IPredicate.cs" />
     <Compile Include="EntityPredicate.cs" />
+    <Compile Include="ObjectPool.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
