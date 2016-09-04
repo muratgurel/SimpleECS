@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SimpleECS
 {
@@ -12,8 +13,17 @@ namespace SimpleECS
 			}
 		}
 
-		private readonly HashSet<Entity> entities = new HashSet<Entity>();
-		private readonly ObjectPool<Entity> pool = new ObjectPool<Entity>(() => new Entity());
+	    public int systemCount
+	    {
+	        get
+	        {
+	            return systems.Count;
+	        }
+	    }
+
+        private readonly HashSet<System> systems = new HashSet<System>();
+        private readonly HashSet<Entity> entities = new HashSet<Entity>();
+        private readonly ObjectPool<Entity> pool = new ObjectPool<Entity>(() => new Entity());
 
 		public Entity CreateEntity()
 		{
@@ -28,6 +38,23 @@ namespace SimpleECS
 			entities.Remove(entity);
 			pool.PutObject(entity);
 		}
+
+	    public void AddSystem(System system)
+	    {
+            if (system.world != null)
+	        {
+	            throw new InvalidOperationException("System is already initialized in another World. You cannot use the same system instance in more than one world.");
+	        }
+
+	        systems.Add(system);
+            system.Initialize(this);
+	    }
+
+	    public void RemoveSystem(System system)
+	    {
+	        systems.Remove(system);
+            system.Uninitialize();
+	    }
 
 		public List<Entity> GetEntities(IPredicate<Entity> predicate)
 		{

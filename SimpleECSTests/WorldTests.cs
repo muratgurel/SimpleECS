@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using NUnit.Framework;
 
 namespace SimpleECS.Test
@@ -92,9 +94,65 @@ namespace SimpleECS.Test
 			Assert.Contains(entityWithComponentTwo, filteredEntities);
 		}
 
+        [Test]
+	    public void ShouldInitializeSystemWithItselfInAddSystem()
+	    {
+	        EmptySystem system = new EmptySystem();
+            world.AddSystem(system);
+
+            Assert.AreSame(world, system.world);
+	    }
+
+        [Test]
+	    public void ShouldUninitializeSystemInRemoveSystem()
+	    {
+            EmptySystem system = new EmptySystem();
+            world.AddSystem(system);
+            world.RemoveSystem(system);
+
+            Assert.AreNotSame(world, system.world);
+            Assert.IsNull(system.world);
+        }
+
+        [Test]
+	    public void ShouldAddSystemToWorldAfterAdd()
+	    {
+            EmptySystem system = new EmptySystem();
+            world.AddSystem(system);
+
+            Assert.AreEqual(1, world.systemCount);
+        }
+
+        [Test]
+	    public void ShouldRemoveSystemFromWorldAfterRemove()
+	    {
+            EmptySystem system = new EmptySystem();
+            world.AddSystem(system);
+            world.RemoveSystem(system);
+
+            Assert.AreEqual(0, world.systemCount);
+        }
+
+	    [Test]
+	    public void ShouldThrowExceptionIfAlreadyInitializedSystemIsAdded()
+	    {
+            EmptySystem system = new EmptySystem();
+            world.AddSystem(system);
+
+	        Assert.Throws<InvalidOperationException>(() =>
+	        {
+                world.AddSystem(system);
+	        });
+	    }
+
 		private class EmptyComponent : IComponent { }
 		private class EmptyComponentTwo : IComponent { }
 		private class EmptyComponentThree : IComponent { }
+
+	    private class EmptySystem : System
+	    {
+	        public override IPredicate<Entity> entityPredicate { get; }
+	    }
 	}
 }
 
