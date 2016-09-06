@@ -2,6 +2,7 @@
 
 namespace SimpleECS
 {
+    // TODO: Add unit tests
     public sealed class EventQueue
     {
         private readonly Queue<object> events = new Queue<object>();
