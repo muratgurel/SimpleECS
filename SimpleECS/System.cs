@@ -17,7 +17,7 @@ namespace SimpleECS
         {
             if (world == null)
             {
-                throw new ArgumentNullException(nameof(world), "System is not added to any world. Use World.AddSystem()");
+                throw new ArgumentNullException("world", "System is not added to any world. Use World.AddSystem()");
             }
 
             return world.GetEntities(entityPredicate);
