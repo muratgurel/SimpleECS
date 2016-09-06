@@ -16,6 +16,7 @@ namespace SimpleECS
 
         public EventQueue(string eventName)
         {
+            // TODO: We have a leak here. EventQueue is added to a static dictionary.
             EventDispatcher.Register(eventName, this);
         }
 
