@@ -26,7 +26,9 @@ namespace SimpleECS
 
         public object[] GetAll()
         {
-            return events.ToArray();
+            object[] allEvents = events.ToArray();
+            events.Clear();
+            return allEvents;
         }
 
         internal void OnEvent(object data)
