@@ -145,6 +145,19 @@ namespace SimpleECS.Test
 	        });
 	    }
 
+		[Test]
+		public void ParameterlessConstructorShouldSetNameToWorld()
+		{
+			Assert.AreEqual("World", world.name);
+		}
+
+		[Test]
+		public void ConstructorWithNameShouldSetWorldName()
+		{
+			world = new World("Game World");
+			Assert.AreEqual("Game World", world.name);
+		}
+
 		private class EmptyComponent : IComponent { }
 		private class EmptyComponentTwo : IComponent { }
 		private class EmptyComponentThree : IComponent { }

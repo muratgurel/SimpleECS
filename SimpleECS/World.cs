@@ -5,6 +5,12 @@ namespace SimpleECS
 {
 	public class World
 	{
+		public string name
+		{
+			get;
+			private set;
+		}
+
 		public int entityCount
 		{
 			get
@@ -24,6 +30,16 @@ namespace SimpleECS
         private readonly HashSet<System> systems = new HashSet<System>();
         private readonly HashSet<Entity> entities = new HashSet<Entity>();
         private readonly ObjectPool<Entity> pool = new ObjectPool<Entity>(() => new Entity());
+
+		public World()
+		{
+			name = "World";
+		}
+
+		public World(string name)
+		{
+			this.name = name;
+		}
 
 		public Entity CreateEntity()
 		{
