@@ -158,6 +158,18 @@ namespace SimpleECS.Test
 			Assert.AreEqual("Game World", world.name);
 		}
 
+		[Test]
+		public void ParameterlessCreateEntityShouldSetEntityNameToEntity()
+		{
+			Assert.AreEqual("Entity", world.CreateEntity().name);
+		}
+
+		[Test]
+		public void CustomNamedCreateEntityShouldSetEntityName()
+		{
+			Assert.AreEqual("Enemy", world.CreateEntity("Enemy").name);
+		}
+
 		private class EmptyComponent : IComponent { }
 		private class EmptyComponentTwo : IComponent { }
 		private class EmptyComponentThree : IComponent { }

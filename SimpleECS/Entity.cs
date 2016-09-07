@@ -5,6 +5,12 @@ namespace SimpleECS
 {
 	public class Entity
 	{
+		public string name
+		{
+			get;
+			internal set;
+		}
+
 		public int componentCount
 		{
 			get

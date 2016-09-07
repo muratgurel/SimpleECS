@@ -43,7 +43,14 @@ namespace SimpleECS
 
 		public Entity CreateEntity()
 		{
+			return CreateEntity("Entity");
+		}
+
+		public Entity CreateEntity(string name)
+		{
 			Entity newEntity = pool.GetObject();
+			newEntity.name = name;
+
 			entities.Add(newEntity);
 			return newEntity;
 		}
