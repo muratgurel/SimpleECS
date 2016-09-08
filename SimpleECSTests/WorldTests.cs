@@ -174,10 +174,7 @@ namespace SimpleECS.Test
 		private class EmptyComponentTwo : IComponent { }
 		private class EmptyComponentThree : IComponent { }
 
-	    private class EmptySystem : System
-	    {
-	        public override IPredicate<Entity> entityPredicate { get; }
-	    }
+	    private class EmptySystem : System { }
 	}
 }
 

@@ -70,13 +70,13 @@ namespace SimpleECS
 	        }
 
 	        systems.Add(system);
-            system.Initialize(this);
+            system.OnAdd(this);
 	    }
 
 	    public void RemoveSystem(System system)
 	    {
 	        systems.Remove(system);
-            system.Uninitialize();
+            system.OnRemove();
 	    }
 
 		public List<Entity> GetEntities(IPredicate<Entity> predicate)

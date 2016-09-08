@@ -5,31 +5,34 @@ namespace SimpleECS
 {
     public abstract class System
     {
-        public abstract IPredicate<Entity> entityPredicate { get; }
-
         public World world
         {
             get;
             private set;
         }
 
-        public List<Entity> GetEntities()
+		protected virtual void Initialize() { }
+		protected virtual void Uninitialize() { }
+
+		public List<Entity> GetEntities(IPredicate<Entity> predicate)
         {
             if (world == null)
             {
                 throw new ArgumentNullException("world", "System is not added to any world. Use World.AddSystem()");
             }
 
-            return world.GetEntities(entityPredicate);
+			return world.GetEntities(predicate);
         }
 
-        internal void Initialize(World world)
+        internal void OnAdd(World world)
         {
             this.world = world;
+			Initialize();
         }
 
-        internal void Uninitialize()
+        internal void OnRemove()
         {
+			Uninitialize();
             world = null;
         }
     }

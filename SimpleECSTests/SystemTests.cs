@@ -27,7 +27,7 @@ namespace SimpleECS.Test
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
-                system.GetEntities();
+                system.GetEntities(EntityPredicate.New);
             });
         }
 
@@ -37,33 +37,16 @@ namespace SimpleECS.Test
             world.AddSystem(system);
             Entity entity = world.CreateEntity();
 
-            Assert.Contains(entity, system.GetEntities());
-        }
-
-        [Test]
-        public void GetEntitiesShouldNeverReturnNullList()
-        {
-            world.AddSystem(system);
-
-            Assert.IsNotNull(system.GetEntities());
-
-            world.CreateEntity();
-
-            Assert.IsNotNull(system.GetEntities());
+            Assert.Contains(entity, system.GetEntities(EntityPredicate.New));
         }
 
         private class ExampleSystem : System
         {
-            public override IPredicate<Entity> entityPredicate
-            {
-                get { return EntityPredicate.New; }
-            }
-
             public void Update(float deltaTime)
             {
-                foreach (var entity in GetEntities())
+                foreach (var entity in GetEntities(EntityPredicate.New))
                 {
-                    
+                    // Do something
                 }
             }
         }
