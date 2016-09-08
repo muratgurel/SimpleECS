@@ -6,7 +6,7 @@
 - [ ] Built-in events for entity create/destroy etc.
 - [ ] Documentation (both in code & wiki)
 - [ ] Benchmark for GetEntities in World
-- [ ] Better API for system & predicate
+- [x] Better API for system & predicate
 - [ ] World & entity inspector
 - [ ] Overall benchmarking
 - [ ] Event unit tests
