@@ -16,6 +16,18 @@ namespace SimpleECS
 			}
 		}
 
+		public EntityPredicate Include<T>()
+		{
+			includedTypes.Add(typeof(T));
+			return this;
+		}
+
+		public EntityPredicate Exclude<T>()
+		{
+			exludedTypes.Add(typeof(T));
+			return this;
+		}
+
 		public bool Matches(Entity obj)
 		{
 			foreach (var type in includedTypes)
@@ -35,45 +47,6 @@ namespace SimpleECS
 			}
 
 			return true;
-		}
-	}
-
-	public static class EntityPredicateExtensions
-	{
-		public static EntityPredicate Include<T>(this EntityPredicate predicate)
-		{
-			predicate.includedTypes.Add(typeof(T));
-			return predicate;
-		}
-
-		public static EntityPredicate Include<T, U>(this EntityPredicate predicate)
-		{
-			predicate.includedTypes.UnionWith(new Type[2] { typeof(T), typeof(U) });
-			return predicate;
-		}
-
-		public static EntityPredicate Include<T, U, V>(this EntityPredicate predicate)
-		{
-			predicate.includedTypes.UnionWith(new Type[3] { typeof(T), typeof(U), typeof(V) });
-			return predicate;
-		}
-
-		public static EntityPredicate Exclude<T>(this EntityPredicate predicate)
-		{
-			predicate.exludedTypes.Add(typeof(T));
-			return predicate;
-		}
-
-		public static EntityPredicate Exclude<T, U>(this EntityPredicate predicate)
-		{
-			predicate.exludedTypes.UnionWith(new Type[2] { typeof(T), typeof(U) });
-			return predicate;
-		}
-
-		public static EntityPredicate Exclude<T, U, V>(this EntityPredicate predicate)
-		{
-			predicate.exludedTypes.UnionWith(new Type[3] { typeof(T), typeof(U), typeof(V) });
-			return predicate;
 		}
 	}
 }
