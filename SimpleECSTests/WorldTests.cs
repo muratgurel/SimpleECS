@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using NUnit.Framework;
 
 namespace SimpleECS.Test
@@ -14,6 +13,49 @@ namespace SimpleECS.Test
 		public void SetUp()
 		{
 			world = new World();
+		}
+
+		[Test]
+		public void CreateEventShouldBeInvokedAfterInitializingEntity()
+		{
+			world.OnEntityCreate += (w, e) => 
+			{
+				Assert.AreEqual("test", e.name);
+				Assert.AreEqual(1, world.entityCount);
+			};
+
+			world.CreateEntity("test");
+		}
+
+		[Test]
+		public void DestroyEventShouldBeInvokedBeforeRemovingComponents()
+		{
+			Entity entity = world.CreateEntity();
+			entity.AddComponent<EmptyComponent>();
+			entity.AddComponent<EmptyComponentTwo>();
+
+			world.OnEntityDestroy += (w, e) => 
+			{
+				Assert.IsTrue(entity.HasComponent<EmptyComponent>());
+				Assert.IsTrue(entity.HasComponent<EmptyComponentTwo>());
+			};
+
+			world.DestroyEntity(entity);
+		}
+
+		[Test]
+		public void DestroyEventShouldBeInvokedBeforePuttingEntityIntoPool()
+		{
+			Entity entity = world.CreateEntity();
+			entity.AddComponent<EmptyComponent>();
+			entity.AddComponent<EmptyComponentTwo>();
+
+			world.OnEntityDestroy += (w, e) =>
+			{
+				Assert.AreEqual(1, world.entityCount);
+			};
+
+			world.DestroyEntity(entity);
 		}
 
 		[Test]

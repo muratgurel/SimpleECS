@@ -5,6 +5,20 @@ namespace SimpleECS
 {
 	public class World
 	{
+		public delegate void EntityEventHandler(World world, Entity entity);
+
+		/// <summary>
+		/// The entity is ready to be used when this event is invoked.
+		/// You can perform operations on the entity inside the handler.
+		/// </summary>
+		public event EntityEventHandler OnEntityCreate;
+		/// <summary>
+		/// It is called before all components are removed from the entity,
+		/// and before it's put in the pool again. So you can query the
+		/// entity inside the handler.
+		/// </summary>
+		public event EntityEventHandler OnEntityDestroy;
+
 		public string name
 		{
 			get;
@@ -52,11 +66,22 @@ namespace SimpleECS
 			newEntity.name = name;
 
 			entities.Add(newEntity);
+
+			if (OnEntityCreate != null)
+			{
+				OnEntityCreate(this, newEntity);
+			}
+
 			return newEntity;
 		}
 
 		public void DestroyEntity(Entity entity)
 		{
+			if (OnEntityDestroy != null)
+			{
+				OnEntityDestroy(this, entity);
+			}
+
 			entity.ClearAllComponents();
 			entities.Remove(entity);
 			pool.PutObject(entity);
