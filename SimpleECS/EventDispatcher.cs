@@ -8,6 +8,11 @@ namespace SimpleECS
 
         public static void Dispatch(string eventName, object data)
         {
+			if (!queues.ContainsKey(eventName))
+			{
+				return;
+			}
+
             foreach (var queue in queues[eventName])
             {
                 queue.OnEvent(data);
