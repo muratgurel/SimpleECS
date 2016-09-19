@@ -3,13 +3,13 @@
 # SimpleECS
 
 ## ToDos
-- [ ] Built-in events for entity create/destroy etc.
+- [x] Built-in events for entity create/destroy etc.
 - [ ] Documentation (both in code & wiki)
 - [ ] Benchmark for GetEntities in World
 - [x] Better API for system & predicate
 - [ ] World & entity inspector
 - [ ] Overall benchmarking
-- [ ] Event unit tests
+- [x] Event unit tests
 - [ ] Example project
 
 ## License
