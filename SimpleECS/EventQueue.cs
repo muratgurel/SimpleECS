@@ -2,10 +2,11 @@
 
 namespace SimpleECS
 {
-    // TODO: Add unit tests
     public sealed class EventQueue
     {
         private readonly Queue<object> events = new Queue<object>();
+
+		public readonly string eventName;
 
         public int pending
         {
@@ -15,11 +16,28 @@ namespace SimpleECS
             }
         }
 
+		public bool isRegistered
+		{
+			get;
+			private set;
+		}
+
         public EventQueue(string eventName)
         {
-            // TODO: We have a leak here. EventQueue is added to a static dictionary.
-            EventDispatcher.Register(eventName, this);
+			this.eventName = eventName;
         }
+
+		public void StartListening()
+		{
+			EventDispatcher.Register(eventName, this);
+			isRegistered = true;
+		}
+
+		public void StopListening()
+		{
+			EventDispatcher.Unregister(eventName, this);
+			isRegistered = false;
+		}
 
         public object Get()
         {

@@ -41,6 +41,7 @@
     <Compile Include="EntityTests.cs" />
     <Compile Include="EntityPredicateTests.cs" />
     <Compile Include="EventDispatcherTests.cs" />
+    <Compile Include="EventQueueTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleECS\SimpleECS.csproj">

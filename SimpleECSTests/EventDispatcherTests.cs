@@ -16,5 +16,29 @@ namespace SimpleECS.Test
 				EventDispatcher.Dispatch("no_listener_event", null);
 			});
 		}
+
+		[Test]
+		public void ShouldCallListenerOnDispatch()
+		{
+			var newQueue = new EventQueue("anEvent");
+			newQueue.StartListening();
+
+			EventDispatcher.Dispatch("anEvent", null);
+			newQueue.StopListening();
+
+			Assert.AreEqual(1, newQueue.pending);
+		}
+
+		[Test]
+		public void ShouldStopCallingListenerAfterRemove()
+		{
+			var newQueue = new EventQueue("anEvent");
+			newQueue.StartListening();
+			newQueue.StopListening();
+
+			EventDispatcher.Dispatch("anEvent", null);
+
+			Assert.AreEqual(0, newQueue.pending);
+		}
 	}
 }
