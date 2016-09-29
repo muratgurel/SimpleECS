@@ -19,12 +19,20 @@ namespace SimpleECS
 		/// </summary>
 		public event EntityEventHandler OnEntityDestroy;
 
+		/// <summary>
+		/// Can be used for debug purposes. A default will
+		/// be set.
+		/// </summary>
 		public string name
 		{
 			get;
 			private set;
 		}
 
+		/// <summary>
+		/// Number of entities that are active inside the world.
+		/// The ones in the pool are not counted towards this value.
+		/// </summary>
 		public int entityCount
 		{
 			get
@@ -33,6 +41,9 @@ namespace SimpleECS
 			}
 		}
 
+		/// <summary>
+		/// Number of systems attached to this world.
+		/// </summary>
 	    public int systemCount
 	    {
 	        get
@@ -55,11 +66,21 @@ namespace SimpleECS
 			this.name = name;
 		}
 
+		/// <summary>
+		/// Creates an entity with default name. The
+		/// pool will be first used if any entity can be
+		/// reused.
+		/// </summary>
 		public Entity CreateEntity()
 		{
 			return CreateEntity("Entity");
 		}
 
+		/// <summary>
+		/// Creates an entity with a custom name. The
+		/// pool will be first used if any entity can be
+		/// reused.
+		/// </summary>
 		public Entity CreateEntity(string name)
 		{
 			Entity newEntity = pool.GetObject();
@@ -75,6 +96,11 @@ namespace SimpleECS
 			return newEntity;
 		}
 
+		/// <summary>
+		/// You should Destroy the entities when you are
+		/// done with them. It removes all components and
+		/// puts the entity back to the pool for reuse.
+		/// </summary>
 		public void DestroyEntity(Entity entity)
 		{
 			if (OnEntityDestroy != null)
@@ -87,6 +113,10 @@ namespace SimpleECS
 			pool.PutObject(entity);
 		}
 
+		/// <summary>
+		/// Add a system to the world. The system is initialized
+		/// when added.
+		/// </summary>
 	    public void AddSystem(System system)
 	    {
             if (system.world != null)
@@ -98,12 +128,23 @@ namespace SimpleECS
             system.OnAdd(this);
 	    }
 
+		/// <summary>
+		/// Remove the system from the world. The system is
+		/// deinitialized when removed.
+		/// </summary>
 	    public void RemoveSystem(System system)
 	    {
 	        systems.Remove(system);
             system.OnRemove();
 	    }
 
+		/// <summary>
+		/// Use this method to query the world and get entities that
+		/// match the predicate. You can use EntityPredicate class
+		/// or roll your own predicates that implement IPredicate<Entity> interface.
+		/// </summary>
+		/// <returns>The entities that match the predicate.</returns>
+		/// <param name="predicate">Predicate.</param>
 		public List<Entity> GetEntities(IPredicate<Entity> predicate)
 		{
 			var filteredEntities = new List<Entity>();

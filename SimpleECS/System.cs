@@ -18,7 +18,6 @@ namespace SimpleECS
 		/// You have to remove it from its world to add it to another world.
 		/// GetEntities method uses this world to fetch entities.
 		/// </summary>
-		/// <value>The world.</value>
         public World world
         {
             get;
@@ -44,8 +43,6 @@ namespace SimpleECS
 		/// the system is added to. You can also do it manually by calling
 		/// GetEntity method of World. This is a convenience method.
 		/// </summary>
-		/// <returns>The entities.</returns>
-		/// <param name="predicate">Predicate.</param>
 		public List<Entity> GetEntities(IPredicate<Entity> predicate)
         {
             if (world == null)
